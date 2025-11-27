@@ -1,7 +1,8 @@
-package spring_practice.RazExpress;
+package spring_practice.RazExpress.exrate;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import spring_practice.RazExpress.payment.ExRateProvider;
 
 public class SimpleExRateProvider implements ExRateProvider {
 

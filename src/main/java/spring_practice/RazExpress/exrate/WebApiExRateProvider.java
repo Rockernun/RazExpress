@@ -1,4 +1,4 @@
-package spring_practice.RazExpress;
+package spring_practice.RazExpress.exrate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
+import spring_practice.RazExpress.payment.ExRateProvider;
 import tools.jackson.databind.ObjectMapper;
 
 public class WebApiExRateProvider implements ExRateProvider {

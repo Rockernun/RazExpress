@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import spring_practice.RazExpress.payment.Payment;
+import spring_practice.RazExpress.payment.PaymentService;
 
 public class Client {
     public static void main(String[] args) throws IOException, InterruptedException {

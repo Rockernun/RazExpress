@@ -1,4 +1,4 @@
-package spring_practice.RazExpress;
+package spring_practice.RazExpress.payment;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

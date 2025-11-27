@@ -1,8 +1,9 @@
-package spring_practice.RazExpress;
+package spring_practice.RazExpress.exrate;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import spring_practice.RazExpress.payment.ExRateProvider;
 
 public class CachedExRateProvider implements ExRateProvider {
 

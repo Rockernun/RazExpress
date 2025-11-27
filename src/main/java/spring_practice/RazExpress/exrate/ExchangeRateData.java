@@ -1,4 +1,4 @@
-package spring_practice.RazExpress;
+package spring_practice.RazExpress.exrate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
