@@ -7,10 +7,8 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Component;
 import tools.jackson.databind.ObjectMapper;
 
-@Component
 public class WebApiExRateProvider implements ExRateProvider {
 
     @Override
@@ -23,6 +21,8 @@ public class WebApiExRateProvider implements ExRateProvider {
 
         ObjectMapper objectMapper = new ObjectMapper();
         ExchangeRateData exchangeRateData = objectMapper.readValue(response, ExchangeRateData.class);
+
+        System.out.println("API ExRate: " + exchangeRateData.rates().get("KRW"));
         return exchangeRateData.rates().get("KRW");
     }
 }
