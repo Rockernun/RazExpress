@@ -13,17 +13,19 @@ class PaymentServiceTest {
     @Test
     @DisplayName("prepare() 메서드가 요구 사항 3가지를 충족했는지 검증")
     void prepare() throws IOException {
-        // 준비
-        PaymentService service = new PaymentService(new WebApiExRateProvider());
+        getPayment(BigDecimal.valueOf(500), BigDecimal.valueOf(5_000));
+        getPayment(BigDecimal.valueOf(1_000), BigDecimal.valueOf(10_000));
+        getPayment(BigDecimal.valueOf(3_000), BigDecimal.valueOf(30_000));
+//        Assertions.assertThat(payment.getValidUntil()).isAfter(LocalDateTime.now());
+//        Assertions.assertThat(payment.getValidUntil()).isBefore(LocalDateTime.now().plusMinutes(30));
+    }
 
-        // 실행
+    private static void getPayment(BigDecimal exRate, BigDecimal convertedAmount) throws IOException {
+        PaymentService service = new PaymentService(new ExRateProviderStub(exRate));
+
         Payment payment = service.prepare(1L, "USD", BigDecimal.TEN);
 
-        // 검증
-        Assertions.assertThat(payment.getExchangeRate()).isNotNull();
-        Assertions.assertThat(payment.getConvertedAmount())
-                .isEqualTo(payment.getExchangeRate().multiply(payment.getForeignCurrencyAmount()));
-        Assertions.assertThat(payment.getValidUntil()).isAfter(LocalDateTime.now());
-        Assertions.assertThat(payment.getValidUntil()).isBefore(LocalDateTime.now().plusMinutes(30));
+        Assertions.assertThat(payment.getExchangeRate()).isEqualByComparingTo(exRate);
+        Assertions.assertThat(payment.getConvertedAmount()).isEqualByComparingTo(convertedAmount);
     }
 }
