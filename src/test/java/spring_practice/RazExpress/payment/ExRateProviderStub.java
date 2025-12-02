@@ -15,4 +15,8 @@ public class ExRateProviderStub implements ExRateProvider {
     public BigDecimal getExRate(String currency) throws IOException {
         return exRate;
     }
+
+    public void setExRate(BigDecimal exRate) {
+        this.exRate = exRate;
+    }
 }
