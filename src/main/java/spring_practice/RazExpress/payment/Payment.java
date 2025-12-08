@@ -1,6 +1,7 @@
 package spring_practice.RazExpress.payment;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDateTime;
 
 public class Payment {
@@ -20,6 +21,18 @@ public class Payment {
         this.exchangeRate = exchangeRate;
         this.convertedAmount = convertedAmount;
         this.validUntil = validUntil;
+    }
+
+    public static Payment createPrepared(Long orderId, String currency, BigDecimal foreignCurrencyAmount, BigDecimal exchangeRate,
+                                         LocalDateTime now) {
+        BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exchangeRate);
+        LocalDateTime validUntil = now.plusMinutes(30);
+
+        return new Payment(orderId, currency, foreignCurrencyAmount, exchangeRate, convertedAmount, validUntil);
+    }
+
+    public boolean isValid(Clock clock) {
+        return LocalDateTime.now(clock).isBefore(this.validUntil);
     }
 
     public Long getOrderId() {
