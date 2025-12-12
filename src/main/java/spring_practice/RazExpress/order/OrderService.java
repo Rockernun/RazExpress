@@ -1,6 +1,7 @@
 package spring_practice.RazExpress.order;
 
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -18,9 +19,13 @@ public class OrderService {
 
     public Order createOrder(String number, BigDecimal totalPrice) {
         Order order = new Order(number, totalPrice);
-        return new TransactionTemplate(transactionManager).execute(status -> {
-            orderRepository.save(order);
-            return order;
-        });
+        orderRepository.save(order);
+        return order;
+    }
+
+    public List<Order> createOrders(List<OrderRequest> reqs) {
+        return new TransactionTemplate(transactionManager).execute(status ->
+            reqs.stream().map(req -> createOrder(req.number(), req.totalPrice())).toList()
+        );
     }
 }
